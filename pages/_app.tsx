@@ -1,6 +1,6 @@
 import { colors } from "@/src/colors";
 import { createGlobalStyle } from "styled-components";
-
+import { AppProps } from "next/app";
 const GlobalStyle = createGlobalStyle`
 * {
   margin: 0;
@@ -23,7 +23,7 @@ a:hover {
 
 `;
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
