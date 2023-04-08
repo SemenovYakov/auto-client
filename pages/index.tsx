@@ -1,4 +1,4 @@
-import { About, Benefits, Footer, Header } from "@/src/components";
+import { About, AuthModal, Benefits, Footer, Header } from "@/src/components";
 import styled from "styled-components";
 
 export default function Home() {
@@ -8,6 +8,7 @@ export default function Home() {
       <About />
       <Benefits />
       <Footer />
+      <AuthModal />
     </PageContainer>
   );
 }
@@ -18,4 +19,5 @@ const PageContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;

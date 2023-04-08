@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { colors } from "../colors";
+import { useGlobalContext } from "../context";
 
 export const RegistrationButton = () => {
+  const { setShowModal } = useGlobalContext();
   return (
-    <Button>
+    <Button onClick={() => setShowModal(true)}>
       <Text>Регистрация</Text>
     </Button>
   );

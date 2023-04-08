@@ -9,4 +9,6 @@ export const colors = {
   grey: "#807B7B",
   darkGrey: "#292929",
   light: "rgba(217, 217, 217, 1)",
+  layout: "rgba(0, 0, 0, 0.8)",
+  modal: "rgba(80, 80, 80, 0.8)",
 };

@@ -1,6 +1,7 @@
 import { colors } from "@/src/colors";
 import { createGlobalStyle } from "styled-components";
 import { AppProps } from "next/app";
+import { ContextProvider } from "@/src/context";
 const GlobalStyle = createGlobalStyle`
 * {
   margin: 0;
@@ -27,7 +28,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <ContextProvider>
+        <Component {...pageProps} />
+      </ContextProvider>
     </>
   );
 }
