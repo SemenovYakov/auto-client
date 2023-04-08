@@ -1,6 +1,33 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import { colors } from "@/src/colors";
+import { createGlobalStyle } from "styled-components";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const GlobalStyle = createGlobalStyle`
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Verdana;
+  background-color: ${colors.bg};
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+`;
+
+export default function App({ Component, pageProps }) {
+  return (
+    <>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </>
+  );
 }
