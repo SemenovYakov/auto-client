@@ -7,7 +7,16 @@ export const Header = () => {
   return (
     <HeaderWrapper>
       <Wrapper>
-        <Logo/>
+        <MenuWrapper>
+          <Logo />
+          <Menu>
+            <MenuText>Главная</MenuText>
+            <MenuText>Услуги</MenuText>
+            <MenuText>О нас</MenuText>
+            <MenuText>Контакты</MenuText>
+          </Menu>
+        </MenuWrapper>
+
         <Title>OPEN DRIVE</Title>
         <Text>Сеть автосервисов</Text>
         <RegistrationButton />
@@ -18,11 +27,15 @@ export const Header = () => {
           <Twitter />
         </IconsWrapper>
       </Wrapper>
-      <Men />
     </HeaderWrapper>
   );
 };
-
+const MenuWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
 const IconsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -64,4 +77,20 @@ const Text = styled.h2`
   line-height: 77px;
   color: ${colors.white};
   margin-bottom: 43px;
+`;
+const Menu = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const MenuText = styled.h2`
+  :hover {
+    color: ${colors.yellow};
+    text-decoration: underline;
+  }
+  font-weight: 200;
+  font-family: Verdana;
+  font-size: 36px;
+  color: ${colors.white};
+  margin-right: 20px;
+  text-decoration: none;
 `;

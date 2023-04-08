@@ -4,4 +4,7 @@ export {VK} from './vk'
 export {Men} from './men'
 export {Youtube} from './youtube'
 export {Twitter} from './twitter'
+export {Image1} from './image1'
+export {Image2} from './image2'
+export {Galka} from './galka'
 

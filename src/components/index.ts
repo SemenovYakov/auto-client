@@ -1,3 +1,5 @@
 export {Header} from './header'
 export {Footer} from './footer'
 export {RegistrationButton} from './registration-button'
+export {About} from './about-us'
+export {Benefits} from './benefits'

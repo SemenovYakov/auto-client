@@ -36,7 +36,7 @@ const FooterText = styled.p`
   margin: 0;
   color: ${colors.white};
   font-family: Verdana;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 400;
 `;
 const TextBlock = styled.div`
