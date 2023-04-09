@@ -1,10 +1,8 @@
 import { colors } from "@/src/colors";
 import { BookModal, ServiceCard } from "@/src/components";
 import { Layout } from "@/src/layout";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+
 export interface Services {
   id: number;
   title: string;
