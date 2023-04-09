@@ -16,6 +16,7 @@ export interface User {
   password: string;
 }
 interface initialState {
+  create: (data: any) => Promise<void>;
   service: Services | null;
   logout: () => void;
   mistake: boolean;
@@ -86,6 +87,28 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const create = async (data: any) => {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const res = await axios.post(
+        "https://autoservice-production.up.railway.app/booking/create",
+        data,
+        {
+          headers: headers,
+        }
+      );
+      if (res) {
+        setMistake(false);
+        setShowModal(false);
+      }
+    } catch (err) {
+      setMistake(true);
+    }
+  };
+
   const [showModal, setShowModal] = useState<boolean>(false);
   const [mistake, setMistake] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
@@ -102,6 +125,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
     setMistake,
     registration,
     logout,
+    create,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

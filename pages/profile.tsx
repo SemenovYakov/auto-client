@@ -1,19 +1,50 @@
 import { colors } from "@/src/colors";
+import { BookingCard } from "@/src/components";
 import { useGlobalContext } from "@/src/context";
+import { UserIcon } from "@/src/icons";
 import { Layout } from "@/src/layout";
 import { withAuth } from "@/src/withAuth";
+import axios from "axios";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+export interface Services {
+  id?: number;
+  title: string;
+  price: string;
+}
 
 const Profile = () => {
   const router = useRouter();
   const { user, logout } = useGlobalContext();
+  const [services, setServices] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(
+        `https://autoservice-production.up.railway.app/users/${user?.id}`
+      );
+      setServices(data.services);
+    })();
+  }, [user?.id]);
   return (
     <Layout title="Профиль">
       <>
-        <Text>Имя: {user?.name}</Text>
-        <Text>Фамилия: {user?.surname}</Text>
-        <Text>Телефон: {user?.phone}</Text>
+        <ProfileWrapper>
+          <UserIcon />
+          <TextWrapper>
+            <Text>Имя: {user?.name}</Text>
+            <Text>Фамилия: {user?.surname}</Text>
+            <Text>Телефон: {user?.phone}</Text>
+          </TextWrapper>
+        </ProfileWrapper>
+
+        <Text>Мои записи</Text>
+        <CardsWrapper>
+          {services?.map((item: Services) => (
+            <BookingCard key={item.id} title={item.title} price={item.price} />
+          ))}
+        </CardsWrapper>
+
         <LogoutButton
           onClick={() => {
             logout();
@@ -28,10 +59,32 @@ const Profile = () => {
 };
 export default withAuth(Profile);
 
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+`;
+
+const ProfileWrapper = styled.div`
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+  border-bottom: 2px solid #625d5d;
+`;
+const CardsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1500px;
+  margin-bottom: 100px;
+`;
 const Text = styled.text`
   font-weight: 500;
   font-family: Verdana;
-  font-size: 64px;
+  font-size: 48px;
   line-height: 77px;
   color: ${colors.white};
   margin-bottom: 50px;

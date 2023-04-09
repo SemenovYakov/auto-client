@@ -7,9 +7,15 @@ import { useGlobalContext } from "../context";
 
 export const AuthModal = () => {
   const [auth, setAuth] = useState("login");
-  const { showModal, setShowModal } = useGlobalContext();
+  const { showModal, setShowModal, setMistake } = useGlobalContext();
   return (
-    <Layout showModal={showModal} onClick={() => setShowModal(false)}>
+    <Layout
+      showModal={showModal}
+      onClick={() => {
+        setShowModal(false);
+        setMistake(false);
+      }}
+    >
       <Modal onClick={(e) => e.stopPropagation()}>
         <TextWrapper>
           <Text onClick={() => setAuth("login")}>Вход</Text>

@@ -4,10 +4,10 @@ import { Layout } from "@/src/layout";
 import styled from "styled-components";
 
 export interface Services {
-  id: number;
-  title: string;
-  price: string;
-  imageUrl: string;
+  id?: number;
+  title?: string;
+  price?: string;
+  imageUrl?: string;
 }
 type Props = {
   services: Services[];

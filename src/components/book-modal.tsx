@@ -4,8 +4,16 @@ import { useGlobalContext } from "../context";
 import { useRouter } from "next/router";
 
 export const BookModal = () => {
-  const { showModal, setShowModal, user, service, setService } =
-    useGlobalContext();
+  const {
+    showModal,
+    setShowModal,
+    setMistake,
+    user,
+    service,
+    setService,
+    mistake,
+    create,
+  } = useGlobalContext();
   const router = useRouter();
   return (
     <Layout
@@ -13,9 +21,11 @@ export const BookModal = () => {
       onClick={() => {
         setShowModal(false);
         setService(null);
+        setMistake((false))
       }}
     >
       <Modal onClick={(e) => e.stopPropagation()}>
+        {mistake && <Mistake>Вы уже записались!</Mistake>}
         {user ? (
           <>
             <TextWrapper>
@@ -25,7 +35,14 @@ export const BookModal = () => {
               <Text>Услуга: {service?.title}</Text>
               <Text>Стоимость: {service?.price}</Text>
             </TextWrapper>
-            <Button>
+            <Button
+              onClick={() =>
+                create({
+                  userId: user.id,
+                  serviceId: service?.id,
+                })
+              }
+            >
               <Text>Записаться</Text>
             </Button>
           </>
@@ -41,6 +58,12 @@ export const BookModal = () => {
     </Layout>
   );
 };
+const Mistake = styled.text`
+  color: ${colors.red};
+  font-size: 24px;
+  font-weight: 400;
+  font-family: Verdana;
+`;
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
