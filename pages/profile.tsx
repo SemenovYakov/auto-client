@@ -40,9 +40,19 @@ const Profile = () => {
 
         <Text>Мои записи</Text>
         <CardsWrapper>
-          {services?.map((item: Services) => (
-            <BookingCard key={item.id} title={item.title} price={item.price} />
-          ))}
+          {services.length ? (
+            <>
+              {services?.map((item: Services) => (
+                <BookingCard
+                  key={item.id}
+                  title={item.title}
+                  price={item.price}
+                />
+              ))}
+            </>
+          ) : (
+            <Text>У вас пока нет записей на услуги</Text>
+          )}
         </CardsWrapper>
 
         <LogoutButton
