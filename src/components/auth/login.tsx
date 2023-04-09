@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import { Formik } from "formik";
 import { colors } from "@/src/colors";
+import { useGlobalContext } from "@/src/context";
 
 export const Login = () => {
+  const { login, mistake } = useGlobalContext();
+
   return (
     <Container>
+      {mistake && <Mistake>Ошибка! Попробуйте заного!</Mistake>}
       <Formik
         initialValues={{ phone: "", password: "" }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            login(values);
             setSubmitting(false);
-          }, 400);
+          }, 300);
         }}
       >
         {({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -33,7 +37,7 @@ export const Login = () => {
               value={values.password}
             />
             <Button type="submit" disabled={isSubmitting}>
-              <Text>Вход</Text>
+              <Text>Войти</Text>
             </Button>
           </Form>
         )}
@@ -41,7 +45,12 @@ export const Login = () => {
     </Container>
   );
 };
-
+const Mistake = styled.text`
+  color: ${colors.red};
+  font-size: 24px;
+  font-weight: 400;
+  font-family: Verdana;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;

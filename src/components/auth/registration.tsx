@@ -1,26 +1,22 @@
 import { colors } from "@/src/colors";
+import { useGlobalContext } from "@/src/context";
 import { Formik } from "formik";
 import styled from "styled-components";
 
 export const Registration = () => {
+  const { registration } = useGlobalContext();
   return (
     <Container>
       <Formik
         initialValues={{ name: "", surname: "", phone: "", password: "" }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            registration(values);
             setSubmitting(false);
           }, 400);
         }}
       >
-        {({
-          values,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
+        {({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <Input
               placeholder="Имя"
@@ -55,7 +51,7 @@ export const Registration = () => {
               value={values.password}
             />
             <Button type="submit" disabled={isSubmitting}>
-              <Text>Вход</Text>
+              <Text>Создать</Text>
             </Button>
           </Form>
         )}

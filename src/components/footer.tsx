@@ -22,10 +22,9 @@ export const Footer = () => {
 };
 
 const FooterBlock = styled.footer`
-  flex-shrink: 0;
+  margin-top: auto;
   padding-block: 25px;
   border-top: 2px solid #625d5d;
-  border-bottom: 2px solid #625d5d;
   width: 100%;
   padding-inline: 100px;
   display: flex;

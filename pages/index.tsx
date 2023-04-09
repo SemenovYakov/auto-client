@@ -1,23 +1,17 @@
-import { About, AuthModal, Benefits, Footer, Header } from "@/src/components";
-import styled from "styled-components";
+import { About, AuthModal, Benefits } from "@/src/components";
 
-export default function Home() {
+import { Layout } from "@/src/layout";
+import { withAuth } from "@/src/withAuth";
+
+const Home = () => {
   return (
-    <PageContainer>
-      <Header />
-      <About />
-      <Benefits />
-      <Footer />
-      <AuthModal />
-    </PageContainer>
+    <Layout>
+      <>
+        <About />
+        <Benefits />
+        <AuthModal />
+      </>
+    </Layout>
   );
-}
-
-const PageContainer = styled.div`
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-`;
+};
+export default withAuth(Home);

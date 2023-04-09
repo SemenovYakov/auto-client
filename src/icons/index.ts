@@ -7,4 +7,5 @@ export {Twitter} from './twitter'
 export {Image1} from './image1'
 export {Image2} from './image2'
 export {Galka} from './galka'
+export {UserIcon}from'./user-icon'
 

@@ -1,31 +1,53 @@
 import styled from "styled-components";
 import { colors } from "../colors";
-import { Inst, Logo, Men, Twitter, VK, Youtube } from "../icons";
+import { Inst, Logo, Men, Twitter, UserIcon, VK, Youtube } from "../icons";
 import { RegistrationButton } from "./registration-button";
+import { useGlobalContext } from "../context";
+import { useRouter } from "next/router";
 
-export const Header = () => {
+type Props = {
+  title?: string;
+};
+
+export const Header = ({ title }: Props) => {
+  const { user } = useGlobalContext();
+  const router = useRouter();
   return (
     <HeaderWrapper>
       <Wrapper>
         <MenuWrapper>
           <Logo />
           <Menu>
-            <MenuText>Главная</MenuText>
-            <MenuText>Услуги</MenuText>
-            <MenuText>О нас</MenuText>
-            <MenuText>Контакты</MenuText>
+            <MenuText onClick={() => router.push("/")}>Главная</MenuText>
+            <MenuText onClick={() => router.push("/services")}>Услуги</MenuText>
+            <MenuText onClick={() => router.push("/about")}>О нас</MenuText>
+            {user && <UserIcon />}
           </Menu>
         </MenuWrapper>
 
         <Title>OPEN DRIVE</Title>
-        <Text>Сеть автосервисов</Text>
-        <RegistrationButton />
-        <IconsWrapper>
-          <Inst />
-          <Youtube />
-          <VK />
-          <Twitter />
-        </IconsWrapper>
+
+        {title ? (
+          <Text>{title}</Text>
+        ) : (
+          <>
+            <Text>Сеть автосервисов</Text>
+            {user ? (
+              <UserWrapper>
+                <UserIcon /> <UserName>{user.surname}</UserName>
+                <UserName>{user.name}</UserName>
+              </UserWrapper>
+            ) : (
+              <RegistrationButton />
+            )}
+            <IconsWrapper>
+              <Inst />
+              <Youtube />
+              <VK />
+              <Twitter />
+            </IconsWrapper>
+          </>
+        )}
       </Wrapper>
     </HeaderWrapper>
   );
@@ -61,6 +83,12 @@ const Wrapper = styled.div`
   flex: 1;
 `;
 
+const UserWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+``;
 const Title = styled.h1`
   margin: 0;
   font-weight: 500;
@@ -78,6 +106,10 @@ const Text = styled.h2`
   color: ${colors.white};
   margin-bottom: 43px;
 `;
+const UserName = styled(Text)`
+  margin-left: 20px;
+`;
+
 const Menu = styled.div`
   display: flex;
   flex-direction: row;
@@ -91,6 +123,7 @@ const MenuText = styled.h2`
   font-family: Verdana;
   font-size: 36px;
   color: ${colors.white};
-  margin-right: 20px;
+  margin-inline: 20px;
   text-decoration: none;
+  cursor: pointer;
 `;
