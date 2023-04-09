@@ -40,7 +40,7 @@ const Profile = () => {
 
         <Text>Мои записи</Text>
         <CardsWrapper>
-          {services.length ? (
+          {services?.length ? (
             <>
               {services?.map((item: Services) => (
                 <BookingCard
