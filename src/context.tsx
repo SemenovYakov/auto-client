@@ -1,3 +1,4 @@
+import { Services } from "@/pages/services";
 import axios from "axios";
 import {
   Dispatch,
@@ -15,6 +16,7 @@ export interface User {
   password: string;
 }
 interface initialState {
+  service: Services | null;
   logout: () => void;
   mistake: boolean;
   setMistake: Dispatch<SetStateAction<boolean>>;
@@ -24,6 +26,7 @@ interface initialState {
   setUser: Dispatch<SetStateAction<User | null>>;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   showModal: boolean;
+  setService: Dispatch<SetStateAction<Services | null>>;
 }
 
 const initial = {} as initialState;
@@ -86,7 +89,10 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [mistake, setMistake] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
+  const [service, setService] = useState<Services | null>(null);
   const value = {
+    service,
+    setService,
     user,
     setUser,
     showModal,
